@@ -1,9 +1,13 @@
 import telebot
 from telebot import types
 import os
+from flask import Flask, request
+
 
 token = "7830729501:AAHHpnLxvTv2GUZEqVeCcFbUUNmJCtSV5h0"
 bot = telebot.TeleBot(token)
+app = Flask(__name__)
+
 #Replace with your token
 
 #Set path where your PDF files are located
@@ -93,5 +97,20 @@ def send_file_and_message(message, filename, info_text):
 		bot_messages.append(msg_error.message_id)
 
 
-#Start the bot
-bot.polling(none_stop = True)
+# Webhook route
+@app.route(f'/{token}', methods=['POST'])
+def webhook():
+    json_str = request.get_data().decode('UTF-8')
+    update = telebot.types.Update.de_json(json_str)
+    bot.process_new_updates([update])
+    return 'ok', 200
+
+
+# Start Flask app
+if __name__ == "__main__":
+    # Set webhook URL for Telegram (replace with your domain name)
+    bot.remove_webhook()
+    # bot.set_webhook(url="https://1234abcd.ngrok.io/" + token)
+
+    # Start Flask server on host 0.0.0.0 and port 8000
+    app.run(host="0.0.0.0", port=8000)
