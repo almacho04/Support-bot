@@ -19,3 +19,4 @@ typing_extensions==4.12.2
 urllib3==2.2.3
 
 flask~=3.0.3
+aiogram~=2.23.1
