@@ -9,9 +9,7 @@ keep_alive()
 
 token = "7904663646:AAFftKg_wX7lnq6Cz_-D9NQKNYK2Te4kC1I"
 bot = telebot.TeleBot(token)
-app = Flask(__name__)
-
-#Replace with your token
+dp = Dispatcher(bot)
 
 #Set path where your PDF files are located
 path = os.path.join(os.getcwd(), 'requirements')
