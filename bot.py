@@ -97,20 +97,5 @@ def send_file_and_message(message, filename, info_text):
 		bot_messages.append(msg_error.message_id)
 
 
-# Webhook route
-@app.route(f'/{token}', methods=['POST'])
-def webhook():
-    json_str = request.get_data().decode('UTF-8')
-    update = telebot.types.Update.de_json(json_str)
-    bot.process_new_updates([update])
-    return 'ok', 200
+bot.polling(none_stop=True)
 
-
-# Start Flask app
-if __name__ == "__main__":
-    # Set webhook URL for Telegram (replace with your domain name)
-    bot.remove_webhook()
-    # bot.set_webhook(url="https://1234abcd.ngrok.io/" + token)
-
-    # Start Flask server on host 0.0.0.0 and port 8000
-    app.run(host="0.0.0.0", port=10000)
