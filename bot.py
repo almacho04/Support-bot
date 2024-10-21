@@ -100,5 +100,20 @@ def send_file_and_message(message, filename, info_text):
 		bot_messages.append(msg_error.message_id)
 
 
-bot.polling(none_stop=True)
+@app.route(f"/{token}", methods=['POST'])
+def webhook():
+    json_str = request.get_data().decode('UTF-8')
+    update = types.Update.de_json(json_str)
+    dp.process_update(update)
+    return Response('ok', status=200)
+	
+if __name__ == "__main__":
+    # Use polling or webhooks depending on your setup
 
+    # If you're using polling (good for development), uncomment this:
+    # executor.start_polling(dp)
+
+    # If you're using webhooks with Flask (good for production), uncomment this:
+    # bot.set_webhook(url="https://<your-ngrok-url>.ngrok-free.app/" + token)  # Replace with your actual ngrok URL
+    # app.run(host="0.0.0.0", port=10000)
+    executor.start_polling(dp)
