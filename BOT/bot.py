@@ -2,6 +2,10 @@ from aiogram import Bot, Dispatcher, executor, types
 import os
 from flask import Flask, request, Response
 
+from keep_alive import keep_alive
+keep_alive()
+
+
 # Flask app for webhook support
 app = Flask(__name__)
 
