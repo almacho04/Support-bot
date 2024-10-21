@@ -7,7 +7,7 @@ from keep_alive import keep_alive
 keep_alive()
 
 
-token = "7175023385:AAEAoXy4IQZPY8T1GFQRCzpfL6-y7c2EJ5g"
+token = "7904663646:AAFftKg_wX7lnq6Cz_-D9NQKNYK2Te4kC1I"
 bot = telebot.TeleBot(token)
 app = Flask(__name__)
 
